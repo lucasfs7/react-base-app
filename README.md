@@ -8,6 +8,7 @@ This is a simple react app base boilerplate on top of `create-react-app`
 
 - plugued with `react-router`
 - automatic page (scene) routing
+- require/import from relative paths (src)
 
 ---
 
