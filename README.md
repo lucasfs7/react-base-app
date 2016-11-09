@@ -1,15 +1,13 @@
 # React APP base boilerplate
 
----
-
 ## What?
 
 This is a simple react app base boilerplate on top of `create-react-app`
 
 ## Features
 
-- plugued `react-router`
-- automatic page routing
+- plugued with `react-router`
+- automatic page (scene) routing
 
 ---
 
@@ -25,6 +23,8 @@ or with `yarn`
 $ yarn
 $ yarn run start
 ```
+
+---
 
 ## Directory structure
 
@@ -81,6 +81,6 @@ import React from 'react'
 export const path = '/b'
 
 export const component = () => (
-  <div>Page B</h1></div>
+  <div>Page B</div>
 )
 ```
