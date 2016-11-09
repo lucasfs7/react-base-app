@@ -1,5 +1,6 @@
 import React from 'react'
 import { Router, Route, browserHistory } from 'react-router'
+import isFunction from 'lodash/isFunction'
 
 const req = require.context('../scenes', true, /\.js$/)
 
@@ -8,15 +9,12 @@ const scenes =  req.keys().map((key) => ({
   module: req(key)
 }))
 
-const getRouteProps = ({ fileName, module }) => {
-  if (module.default && typeof(module.default) === 'function') {
-    return {
-      path: fileName.replace(/\.js/, '').replace('./', '/'),
-      component: module.default
-    }
-  }
-  return module
-}
+const getRouteProps = ({ fileName, module }) => (
+  isFunction(module.default) ? {
+    path: fileName.replace(/\.js/, '').replace('./', '/'),
+    component: module.default
+  } : module
+)
 
 const routes = (
   <Router history={ browserHistory }>
