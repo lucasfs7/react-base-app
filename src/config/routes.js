@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, Route, browserHistory } from 'react-router'
 import isFunction from 'lodash/isFunction'
 
-const req = require.context('../scenes', true, /\.js$/)
+const req = require.context('scenes', true, /\.js$/)
 
 const scenes =  req.keys()
   .filter((key) => !/\.test.js/.test(key))
