@@ -4,7 +4,9 @@ import isFunction from 'lodash/isFunction'
 
 const req = require.context('../scenes', true, /\.js$/)
 
-const scenes =  req.keys().map((key) => ({
+const scenes =  req.keys()
+  .filter((key) => !/\.test.js/.test(key))
+  .map((key) => ({
   fileName: key,
   module: req(key)
 }))
