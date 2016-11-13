@@ -99,6 +99,7 @@ The take act like a scenes wrapper, where it's possible to group scenes under th
 export const onEnter = () => {
   /* here can go auth logic to allow/block all scenes that point to this take */
 }
+
 export const component = (props) => (
   <div>
     <div>Here goes some header/nav</div>
