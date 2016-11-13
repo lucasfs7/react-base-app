@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 
 export const path = '/'
+export const take = 'app'
 
 export const component = (props) => (
   <div>
