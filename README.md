@@ -67,7 +67,7 @@ All kinds of app configurations, including the routes
 The scenes are the pages of the app, each scene is attached to a route. There are two ways to create a scene:
 
 Exporting a component by default (this way the route path will match file name):
-```
+```js
 // src/scenes/b.js
 
 import React from 'react'
@@ -78,7 +78,7 @@ export default () => (
 ```
 
 Exporting the route props (with this way, it's possible to create a custom route):
-```
+```js
 // src/scenes/a.js
 
 import React from 'react'
@@ -93,8 +93,7 @@ export const component = () => (
 ### src/takes
 
 The take act like a scenes wrapper, where it's possible to group scenes under the same wrapper component:
-
-```
+```js
 // src/takes/app.js
 
 export const onEnter = () => {
