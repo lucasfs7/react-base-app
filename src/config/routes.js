@@ -2,30 +2,50 @@ import React from 'react'
 import { Router, Route, browserHistory } from 'react-router'
 import isFunction from 'lodash/isFunction'
 
-const req = require.context('scenes', true, /\.js$/)
-
-const scenes =  req.keys()
+const getFiles = (req) => req
+  .keys()
   .filter((key) => !/\.test.js/.test(key))
   .map((key) => ({
-  fileName: key,
-  module: req(key)
+    fileName: key,
+    module: req(key)
 }))
 
-const getRouteProps = ({ fileName, module }) => (
+const takesReq = require.context('takes', true, /\.js$/)
+const scenesReq = require.context('scenes', true, /\.js$/)
+
+const takes = getFiles(takesReq).map(({ fileName, module }) => ({
+  ...module,
+  name: fileName.replace(/\.js/, '').replace('./', '').toLowerCase()
+}))
+
+const scenes = getFiles(scenesReq).map(({ fileName, module }) => (
   isFunction(module.default) ? {
-    path: fileName.replace(/\.js/, '').replace('./', '/'),
+    path: fileName.replace(/\.js/, '').replace('./', '/').toLowerCase(),
     component: module.default
   } : module
-)
+))
 
-const routes = (
+const routes = [
+  ...takes
+  .map((take, index) => (
+    <Route key={ index } { ...take }>
+      { scenes
+        .filter((scene) => scene.take === take.name)
+        .map((scene, index) => (
+          <Route key={ index } { ...scene } />
+        ))
+      }
+    </Route>
+  )),
+  ...scenes
+  .filter((scene) => !scene.take)
+  .map((scene, index) => (
+    <Route key={ index } { ...scene } />
+  ))
+]
+
+export default (
   <Router history={ browserHistory }>
-    { scenes
-      .map(getRouteProps)
-      .map((route, index) => (
-      <Route key={ index } { ...route } />
-    )) }
+    { routes }
   </Router>
 )
-
-export default routes
