@@ -9,6 +9,7 @@ This is a simple react app base boilerplate on top of `create-react-app`
 - plugued with `react-router`
 - automatic page (scene) routing
 - require/import from relative paths (src)
+- possibility to group scenes as takes (with grouped scenes you can have a wrapper component for multiple routes)
 
 ---
 
@@ -42,6 +43,9 @@ src
   |     |-- index.js
   |     |-- a.js
   |     |-- b.js
+  |-- takes
+  |--   |-- app.js
+  |--   |-- public.js
   |-- index.js
   |-- index.css
 ```
@@ -83,5 +87,23 @@ export const path = '/b'
 
 export const component = () => (
   <div>Page B</div>
+)
+```
+
+### src/takes
+
+The take act like a scenes wrapper, where it's possible to group scenes under the same wrapper component:
+
+```
+// src/takes/app.js
+
+export const onEnter = () => {
+  /* here can go auth logic to allow/block all scenes that point to this take */
+}
+export const component = (props) => (
+  <div>
+    <div>Here goes some header/nav</div>
+    { props.children }
+  </div>
 )
 ```
